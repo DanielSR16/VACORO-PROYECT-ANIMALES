@@ -4,11 +4,11 @@ const vaca = coneccionDB.db.vaca
 
     async function allVacas(){
         try {
-            all_usuarios = await vaca.findAll();
-            return all_usuarios;
+            all_vacas = await vaca.findAll();
+            return all_vacas;
             
         } catch (error) {
-            
+
         }
     }
     async function newVaca(vaca_json){
@@ -23,7 +23,7 @@ const vaca = coneccionDB.db.vaca
             }
     }
 
-    async function updateUsuario(vaca_json){
+    async function updateVaca(vaca_json){
         // console.log(vaca_json)
         // console.log('estoy en actualizar')
         try{
@@ -37,19 +37,26 @@ const vaca = coneccionDB.db.vaca
         }
     }
 
+    async function deleteVaca(vaca_json){
+        try {
+            resultado = await  vaca.destroy(
+                {
+                    where:{
+                        id:vaca_json.id
+                    }
+                }
+            );
+
+        }catch (err) {
+            return err
+        }
+    }
+
     
 controller = {}
 controller.allVacas = allVacas
 controller.newVaca = newVaca
-controller.modificar = updateUsuario
-
-// controller.getUserEmailPass = getUserbyEmailAndPassword
-
-
-
-
-
-
-
+controller.updateVaca = updateVaca
+controller.deleteVaca = deleteVaca
 
 module.exports = {controller}

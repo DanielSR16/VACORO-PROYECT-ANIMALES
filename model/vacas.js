@@ -13,6 +13,7 @@ module.exports = (sequelize, Sequelize) =>{
         num_arete: Sequelize.STRING,
         url_img: Sequelize.STRING,
         estado: Sequelize.INET,
+        edad : Sequelize.INTEGER,
         fecha_llegada: Sequelize.STRING,
 
     }, { freezeTableName: true, timestamps: false });

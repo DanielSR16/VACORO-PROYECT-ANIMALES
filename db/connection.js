@@ -12,7 +12,7 @@ db.Sequelize = Sequelize;
 db.sequelize =  sequelize;
 db.vaca = require("../model/vacas")(sequelize,Sequelize)
 db.toro = require("../model/toros")(sequelize,Sequelize)
-db.becerrp = require("../model/becerros")(sequelize,Sequelize)
+db.becerro = require("../model/becerros")(sequelize,Sequelize)
 
 
 
