@@ -8,7 +8,7 @@
     });
 
 router.post('/new', async (req,res)=>{
-
+    id_usuario = req.body.id_usuario
     nombre = req.body.nombre
     descripcion = req.body.descripcion
     raza =  req.body.raza
@@ -20,6 +20,7 @@ router.post('/new', async (req,res)=>{
 
 
         const Vaca = {
+        id_usuario : id_usuario,
         nombre : nombre,
         descripcion : descripcion,
         raza : raza,
@@ -32,11 +33,8 @@ router.post('/new', async (req,res)=>{
         }
         console.log(Vaca)
         const vaca = vaca_DAO.controller.newVaca(Vaca)
-    
-        res.json(vaca)
-  
- 
-    // console.log('contrasenia has: '+contrasenia_a)
+
+        return res.json({status: 'success'});
 
     })
 
@@ -47,6 +45,7 @@ router.post('/new', async (req,res)=>{
 
     router.post('/update', async (req,res)=>{
         id = req.body.id
+        id_usuario = req.body.id_usuario
         nombre = req.body.nombre
         descripcion = req.body.descripcion
         raza =  req.body.raza
@@ -59,6 +58,7 @@ router.post('/new', async (req,res)=>{
 
         const Vaca = {
             id : id,
+            id_usuario : id_usuario,
             nombre : nombre,
             descripcion : descripcion,
             raza : raza,
@@ -71,7 +71,7 @@ router.post('/new', async (req,res)=>{
         }
 
         const vaca = await vaca_DAO.controller.updateVaca(Vaca);
-        res.json(vaca)
+        res.send({status: 'ok'});
     })
     router.post('/delete', async (req,res)=>{
         id = req.body.id
@@ -81,9 +81,34 @@ router.post('/new', async (req,res)=>{
         }
 
         const vaca = await vaca_DAO.controller.deleteVaca(Vaca);
-        res.json(vaca)
+        res.send({status: 'ok'});
     })
 
+    router.post('/getVacasbyIdUser', async (req,res)=>{
+        id_usuario = req.body.id_usuario
 
+        const Vaca = {
+            id_usuario : id_usuario,
+        }
+
+        const vaca = await vaca_DAO.controller.getVacasbyIdUser(Vaca);
+        res.json(vaca)
+    });
+
+    router.post('/getVacabyId', async (req,res)=>{
+        id = req.body.id
+
+        const Vaca = {
+            id : id,
+        }
+
+        const vaca = await vaca_DAO.controller.getVacabyId(Vaca);
+        data = {
+            "general": [
+                vaca
+            ]
+        };
+        res.json(data);
+    });
 
     module.exports = router;

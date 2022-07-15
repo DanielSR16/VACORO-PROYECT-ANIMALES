@@ -7,6 +7,7 @@ module.exports = (sequelize, Sequelize) =>{
             autoIncrement: true
 
         },
+        id_usuario : Sequelize.INTEGER,
         nombre: Sequelize.STRING,
         descripcion: Sequelize.STRING,
         raza: Sequelize.STRING,

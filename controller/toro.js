@@ -1,5 +1,6 @@
 class toro{
-    constructor(nombre,descripcion,raza,contrasenia,num_arete,url_img,estado,fecha_llegada){
+    constructor(id_usuario,nombre,descripcion,raza,contrasenia,num_arete,url_img,estado,fecha_llegada){
+        this.id_usuario = id_usuario,
         this.nombre = nombre,
         this.descripcion = descripcion,
         this.raza = raza,

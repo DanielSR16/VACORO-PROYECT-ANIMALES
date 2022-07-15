@@ -13,7 +13,7 @@ router.get('/all',async(req,res)=>{
     console.log(becerro)
 })
 router.post('/new', async (req,res)=>{
-
+    id_usuario : req.body.id_usuario
     nombre = req.body.nombre
     descripcion = req.body.descripcion
     raza =  req.body.raza
@@ -27,6 +27,7 @@ router.post('/new', async (req,res)=>{
 
 
     const Becerro = {
+        id_usuario : id_usuario,
         nombre : nombre,
         descripcion : descripcion,
         raza : raza,

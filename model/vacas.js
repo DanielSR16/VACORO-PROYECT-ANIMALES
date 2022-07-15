@@ -1,12 +1,13 @@
 module.exports = (sequelize, Sequelize) =>{
 
     const Vaca = sequelize.define('vacas',{
-        id:{
+        id :{
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
 
         },
+        id_usuario: Sequelize.INTEGER,
         nombre: Sequelize.STRING,
         descripcion: Sequelize.STRING,
         raza: Sequelize.STRING,

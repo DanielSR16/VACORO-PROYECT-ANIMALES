@@ -7,13 +7,12 @@ router.get('/',(req,res)=>{
 
 });
 
-
 router.get('/all',async(req,res)=>{
     const toro =  await toro_DAO.controller.allToros()
     res.send(toro)
 })
 router.post('/new', async (req,res)=>{
-
+    id_usuario = req.body.id_usuario
     nombre = req.body.nombre
     descripcion = req.body.descripcion
     raza =  req.body.raza
@@ -25,6 +24,7 @@ router.post('/new', async (req,res)=>{
 
 
     const Toro = {
+        id_usuario : id_usuario,
         nombre : nombre,
         descripcion : descripcion,
         raza : raza,
@@ -38,7 +38,8 @@ router.post('/new', async (req,res)=>{
 
     const toro = toro_DAO.controller.newToro(Toro)
 
-    res.json(toro)
+    //res.json(toro)
+    return res.json({status: 'success'});
 
 
 
@@ -47,6 +48,7 @@ router.post('/new', async (req,res)=>{
 
 router.post('/update', async (req,res)=>{
     id = req.body.id
+    id_usuario = req.body.id_usuario
     nombre = req.body.nombre
     descripcion = req.body.descripcion
     raza =  req.body.raza
@@ -59,6 +61,7 @@ router.post('/update', async (req,res)=>{
 
     const Toro = {
         id : id,
+        id_usuario : id_usuario,
         nombre : nombre,
         descripcion : descripcion,
         raza : raza,
@@ -67,11 +70,11 @@ router.post('/update', async (req,res)=>{
         estado : estado,
         edad : edad,
         fecha_llegada : fecha_llegada,
-
     }
 
     const toro = await toro_DAO.controller.updateToro(Toro);
-    res.json(toro)
+
+    res.send({status: 'ok'});
 })
 router.post('/delete', async (req,res)=>{
     id = req.body.id
@@ -81,9 +84,24 @@ router.post('/delete', async (req,res)=>{
     }
 
     const toro = await toro_DAO.controller.deleteToro(Toro);
-    res.json(toro)
+    res.send({status: 'ok'});
 })
 
+router.post('/getTorobyId', async (req,res)=>{
+    id = req.body.id
+
+    const Toro = {
+        id : id,
+    }
+
+    const toro = await toro_DAO.controller.getTorobyId(Toro);
+    data = {
+        "general": [
+            toro
+        ]
+    };
+    res.json(data);
+});
 
 
 module.exports = router;

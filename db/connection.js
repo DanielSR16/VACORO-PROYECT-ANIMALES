@@ -16,5 +16,4 @@ db.becerro = require("../model/becerros")(sequelize,Sequelize)
 
 
 
-
 module.exports = {db};

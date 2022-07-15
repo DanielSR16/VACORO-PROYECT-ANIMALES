@@ -52,11 +52,31 @@ async function deleteToro(toro_json){
     }
 }
 
+    async function getTorobyId(toro_json){
+        try {
+            resultado = await  toro.findByPk(
+                toro_json.id
+            );
+
+            if (resultado === null) {
+
+                return null
+            } else {
+
+                return resultado
+            }
+
+        }catch (err) {
+            console.log(err)
+            return err
+        }
+    }
 
 controller = {}
 controller.allToros = allToros
 controller.newToro = newToro
 controller.updateToro = updateToro
 controller.deleteToro = deleteToro
+controller.getTorobyId = getTorobyId
 
 module.exports = {controller}
