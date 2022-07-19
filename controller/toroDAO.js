@@ -52,25 +52,25 @@ async function deleteToro(toro_json){
     }
 }
 
-    async function getTorobyId(toro_json){
-        try {
-            resultado = await  toro.findByPk(
-                toro_json.id
-            );
+async function getTorobyId(toro_json){
+    try {
+        resultado = await  toro.findByPk(
+            toro_json.id
+        );
 
-            if (resultado === null) {
+        if (resultado === null) {
 
-                return null
-            } else {
+            return null
+        } else {
 
-                return resultado
-            }
-
-        }catch (err) {
-            console.log(err)
-            return err
+            return resultado
         }
+
+    }catch (err) {
+        console.log(err)
+        return err
     }
+}
 
 controller = {}
 controller.allToros = allToros

@@ -92,6 +92,20 @@ router.post('/new', async (req,res)=>{
         }
 
         const vaca = await vaca_DAO.controller.getVacasbyIdUser(Vaca);
+        vaca.unshift(
+            {
+                "id": -1,
+                "id_usuario": -1,
+                "nombre": "Sin madre",
+                "descripcion": "NULL",
+                "raza": "NULL",
+                "num_arete": "NULL",
+                "url_img": "https://image-vacoro.s3.amazonaws.com/d2b9e08f-322b-4d98-8322-2569665e523c.jpg",
+                "estado": -1,
+                "edad": -1,
+                "fecha_llegada": "0000-00-00"
+            },
+        )
         res.json(vaca)
     });
 
@@ -110,5 +124,8 @@ router.post('/new', async (req,res)=>{
         };
         res.json(data);
     });
+
+
+
 
     module.exports = router;

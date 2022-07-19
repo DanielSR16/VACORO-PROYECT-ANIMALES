@@ -13,7 +13,7 @@ router.get('/all',async(req,res)=>{
     console.log(becerro)
 })
 router.post('/new', async (req,res)=>{
-    id_usuario : req.body.id_usuario
+    id_usuario = req.body.id_usuario
     nombre = req.body.nombre
     descripcion = req.body.descripcion
     raza =  req.body.raza
@@ -42,9 +42,7 @@ router.post('/new', async (req,res)=>{
 
     const becerro = becerro_DAO.controller.newBecerro(Becerro)
 
-    res.json(becerro)
-
-
+    return res.json({status: 'success'});
 
 })
 
@@ -78,7 +76,7 @@ router.post('/update', async (req,res)=>{
     }
 
     const becerro = await becerro_DAO.controller.updateBecerro(Becerro);
-    res.json(becerro)
+    res.send({status: 'ok'});
 })
 router.post('/delete', async (req,res)=>{
     id = req.body.id
@@ -88,9 +86,24 @@ router.post('/delete', async (req,res)=>{
     }
 
     const becerro = await becerro_DAO.controller.deleteBecerro(Becerro);
-    res.json(becerro)
+    res.send({status: 'ok'});
 })
 
+router.post('/getBecerrobyId', async (req,res)=>{
+    id = req.body.id
+
+    const Becerro = {
+        id : id,
+    }
+
+    const becerro = await becerro_DAO.controller.getBecerrobyId(Becerro);
+    data = {
+        "general": [
+            becerro
+        ]
+    };
+    res.json(data);
+});
 
 
 module.exports = router;

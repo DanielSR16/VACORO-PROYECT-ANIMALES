@@ -94,6 +94,7 @@ const vaca = coneccionDB.db.vaca
 
 
 
+
 controller = {}
 controller.allVacas = allVacas
 controller.newVaca = newVaca
@@ -101,4 +102,5 @@ controller.updateVaca = updateVaca
 controller.deleteVaca = deleteVaca
 controller.getVacasbyIdUser =getVacasbyIdUser
 controller.getVacabyId = getVacabyId
+
 module.exports = {controller}

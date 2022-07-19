@@ -7,16 +7,16 @@ module.exports = (sequelize, Sequelize) =>{
             autoIncrement: true
 
         },
-        id_usuario : Sequelize.INTEGER,
+        id_usuario: Sequelize.INTEGER,
         nombre: Sequelize.STRING,
         descripcion: Sequelize.STRING,
         raza: Sequelize.STRING,
         num_arete: Sequelize.STRING,
         url_img: Sequelize.STRING,
-        fecha_llegada: Sequelize.STRING,
         estado: Sequelize.STRING,
         edad: Sequelize.INTEGER,
         id_vaca: Sequelize.INTEGER,
+        fecha_llegada: Sequelize.STRING,
 
         
     }, { freezeTableName: true, timestamps: false });

@@ -50,12 +50,30 @@ async function deleteBecerro(becerro_json){
         return err
     }
 }
+async function getBecerrobyId(becerro_json){
+    try {
+        resultado = await  becerro.findByPk(
+            becerro_json.id
+        );
 
+        if (resultado === null) {
+
+            return null
+        } else {
+
+            return resultado
+        }
+
+    }catch (err) {
+        console.log(err)
+        return err
+    }
+}
 
 controller = {}
 controller.allBecerros = allBecerros
 controller.newBecerro = newBecerro
 controller.updateBecerro = updateBecerro
 controller.deleteBecerro = deleteBecerro
-
+controller.getBecerrobyId = getBecerrobyId
 module.exports = {controller}
