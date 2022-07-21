@@ -11,6 +11,20 @@ async function allToros(){
 
     }
 }
+
+async function allTorosUsuario(usuario){
+    try {
+        all_toros_usuario = await toro.findAll({
+            where:{
+                id_usuario : usuario.id_usuario
+            }
+        });
+        return all_toros_usuario;
+
+    } catch (error) {
+
+    }
+}
 async function newToro(toro_json){
     // console.log('estoy en metodo')
 
@@ -71,6 +85,25 @@ async function getTorobyId(toro_json){
         return err
     }
 }
+async function getTorosbyIdUser(usuario){
+    console.log(usuario)
+
+    try{
+        resultado = await vaca.findAll({
+            where: {
+                id_usuario : usuario.id_usuario,
+            },
+        })
+        if (resultado === null) {
+            return null
+        } else {
+            return resultado
+        }
+    }catch(err){
+        return err
+    }
+}
+
 
 controller = {}
 controller.allToros = allToros
@@ -78,5 +111,7 @@ controller.newToro = newToro
 controller.updateToro = updateToro
 controller.deleteToro = deleteToro
 controller.getTorobyId = getTorobyId
+controller.getTorosbyIdUser = getTorosbyIdUser
+controller.allTorosUsuario = allTorosUsuario
 
 module.exports = {controller}

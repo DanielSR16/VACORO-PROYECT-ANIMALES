@@ -92,6 +92,25 @@ const vaca = coneccionDB.db.vaca
         }
     }
 
+async function getVACAbyIdUser(usuario){
+    console.log(usuario)
+
+    try{
+        resultado = await vaca.findAll({
+            where: {
+                id_usuario : usuario.id_usuario,
+            },
+        })
+        if (resultado === null) {
+            return null
+        } else {
+            return resultado
+        }
+    }catch(err){
+        return err
+    }
+}
+
 
 
 
@@ -102,5 +121,6 @@ controller.updateVaca = updateVaca
 controller.deleteVaca = deleteVaca
 controller.getVacasbyIdUser =getVacasbyIdUser
 controller.getVacabyId = getVacabyId
+controller.getVACAbyIdUser = getVACAbyIdUser
 
 module.exports = {controller}

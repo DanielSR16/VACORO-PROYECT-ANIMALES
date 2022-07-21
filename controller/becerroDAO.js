@@ -70,10 +70,30 @@ async function getBecerrobyId(becerro_json){
     }
 }
 
+async function getBecerrosbyIdUser(usuario){
+    console.log(usuario)
+
+    try{
+        resultado = await becerro.findAll({
+            where: {
+                id_usuario : usuario.id_usuario,
+            },
+        })
+        if (resultado === null) {
+            return null
+        } else {
+            return resultado
+        }
+    }catch(err){
+        return err
+    }
+}
+
 controller = {}
 controller.allBecerros = allBecerros
 controller.newBecerro = newBecerro
 controller.updateBecerro = updateBecerro
 controller.deleteBecerro = deleteBecerro
 controller.getBecerrobyId = getBecerrobyId
+controller.getBecerrosbyIdUser = getBecerrosbyIdUser
 module.exports = {controller}

@@ -1,18 +1,61 @@
 const router = require('express').Router();
 const becerro_DAO = require('../controller/becerroDAO')
+verificacion = require("../validacion")
+
+// verificacion.use((req,res,next)=>{
+//     let token = req.headers['x-access-token'] || req.headers['authorization']
+//     // console.log(token)
+//     if(!token){
+//         res.status(401).send(
+//             {
+//                 error: 'es necesario un token'
+//             }
+//         )
+//         return
+//     }
+//     if(token.startsWith('Bearer ')){
+//         token = token.slice(7,token.length);
+//         console.log(token)
+//     }
+//     if(token){
+//         jwt.verify(token,"clavesecreta123",(error,decode)=>{
+//             console.log(error)
+//             if(error){
+//                 return res.json({
+//                     message: 'el token no es valido'
+//                 },)
+//             }else{
+//                 req.decode = decode;
+//                 next();
+//             }
+//         },)
+//     }
+//
+// });
 
 router.get('/',(req,res)=>{
     res.send('Hola prueba becerro')
 });
 
 
-router.get('/all',async(req,res)=>{
+router.get('/all',verificacion,async(req,res)=>{
     console.log('aaaaaaaaaaaaaa')
     const becerro =  await becerro_DAO.controller.allBecerros()
     res.send(becerro)
     console.log(becerro)
 })
-router.post('/new', async (req,res)=>{
+
+router.post('/getBecerrosUsuario',verificacion,async(req,res)=>{
+    id_usuario = req.body.id_usuario
+
+    const usuario ={
+        id_usuario :id_usuario
+    }
+    const toro =  await becerro_DAO.controller.getBecerrosbyIdUser(usuario)
+    res.send(toro)
+})
+
+router.post('/new', verificacion,async (req,res)=>{
     id_usuario = req.body.id_usuario
     nombre = req.body.nombre
     descripcion = req.body.descripcion
@@ -47,7 +90,7 @@ router.post('/new', async (req,res)=>{
 })
 
 
-router.post('/update', async (req,res)=>{
+router.post('/update', verificacion,async (req,res)=>{
     id = req.body.id,
     nombre = req.body.nombre
     descripcion = req.body.descripcion
@@ -78,7 +121,7 @@ router.post('/update', async (req,res)=>{
     const becerro = await becerro_DAO.controller.updateBecerro(Becerro);
     res.send({status: 'ok'});
 })
-router.post('/delete', async (req,res)=>{
+router.post('/delete', verificacion,async (req,res)=>{
     id = req.body.id
 
     const Becerro = {
@@ -89,7 +132,7 @@ router.post('/delete', async (req,res)=>{
     res.send({status: 'ok'});
 })
 
-router.post('/getBecerrobyId', async (req,res)=>{
+router.post('/getBecerrobyId',verificacion, async (req,res)=>{
     id = req.body.id
 
     const Becerro = {

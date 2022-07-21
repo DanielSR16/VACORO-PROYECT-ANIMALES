@@ -1,17 +1,30 @@
 const router = require('express').Router();
 const toro_DAO = require('../controller/toroDAO')
 
+verificacion = require("../validacion")
+
 router.get('/',(req,res)=>{
     res.send('Hola prueba Toro')
 
 
 });
 
-router.get('/all',async(req,res)=>{
+router.get('/all',verificacion,async(req,res)=>{
     const toro =  await toro_DAO.controller.allToros()
     res.send(toro)
 })
-router.post('/new', async (req,res)=>{
+
+router.post('/getTorosUsuario',verificacion,async(req,res)=>{
+    id_usuario = req.body.id_usuario
+
+    const usuario ={
+        id_usuario :id_usuario
+    }
+    const toro =  await toro_DAO.controller.allTorosUsuario(usuario)
+    res.send(toro)
+})
+
+router.post('/new', verificacion,async (req,res)=>{
     id_usuario = req.body.id_usuario
     nombre = req.body.nombre
     descripcion = req.body.descripcion
@@ -46,7 +59,7 @@ router.post('/new', async (req,res)=>{
 })
 
 
-router.post('/update', async (req,res)=>{
+router.post('/update', verificacion,async (req,res)=>{
     id = req.body.id
     id_usuario = req.body.id_usuario
     nombre = req.body.nombre
@@ -76,7 +89,7 @@ router.post('/update', async (req,res)=>{
 
     res.send({status: 'ok'});
 })
-router.post('/delete', async (req,res)=>{
+router.post('/delete', verificacion,async (req,res)=>{
     id = req.body.id
 
     const Toro = {
@@ -87,7 +100,7 @@ router.post('/delete', async (req,res)=>{
     res.send({status: 'ok'});
 })
 
-router.post('/getTorobyId', async (req,res)=>{
+router.post('/getTorobyId', verificacion,async (req,res)=>{
     id = req.body.id
 
     const Toro = {
@@ -102,6 +115,15 @@ router.post('/getTorobyId', async (req,res)=>{
     };
     res.json(data);
 });
+
+
+
+
+
+
+
+
+
 
 
 module.exports = router;

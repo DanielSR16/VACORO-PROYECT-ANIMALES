@@ -1,5 +1,10 @@
     const router = require('express').Router();
     const vaca_DAO = require('../controller/vacaDAO')
+    const toro_DAO = require("../controller/toroDAO");
+    const express = require("express");
+    verificacion = require("../validacion")
+
+
 
     router.get('/',(req,res)=>{
         res.send('Hola prueba Vaca')
@@ -7,7 +12,7 @@
        
     });
 
-router.post('/new', async (req,res)=>{
+router.post('/new', verificacion,async (req,res)=>{
     id_usuario = req.body.id_usuario
     nombre = req.body.nombre
     descripcion = req.body.descripcion
@@ -38,12 +43,12 @@ router.post('/new', async (req,res)=>{
 
     })
 
-    router.get('/all',async(req,res)=>{
+    router.get('/all',verificacion,async(req,res)=>{
         const vaca =  await vaca_DAO.controller.allVacas()
         res.send(vaca)
     })
 
-    router.post('/update', async (req,res)=>{
+    router.post('/update', verificacion,async (req,res)=>{
         id = req.body.id
         id_usuario = req.body.id_usuario
         nombre = req.body.nombre
@@ -84,12 +89,13 @@ router.post('/new', async (req,res)=>{
         res.send({status: 'ok'});
     })
 
-    router.post('/getVacasbyIdUser', async (req,res)=>{
+    router.post('/getVacasbyIdUser',verificacion, async (req,res)=>{
         id_usuario = req.body.id_usuario
 
         const Vaca = {
             id_usuario : id_usuario,
         }
+        console.log(Vaca);
 
         const vaca = await vaca_DAO.controller.getVacasbyIdUser(Vaca);
         vaca.unshift(
@@ -109,7 +115,7 @@ router.post('/new', async (req,res)=>{
         res.json(vaca)
     });
 
-    router.post('/getVacabyId', async (req,res)=>{
+    router.post('/getVacabyId', verificacion,async (req,res)=>{
         id = req.body.id
 
         const Vaca = {
@@ -124,6 +130,19 @@ router.post('/new', async (req,res)=>{
         };
         res.json(data);
     });
+
+    router.post('/getVacaUsuario',verificacion,async(req,res)=>{
+        id_usuario = req.body.id_usuario
+
+        const usuario ={
+            id_usuario :id_usuario
+        }
+        const vaca =  await vaca_DAO.controller.getVACAbyIdUser(usuario)
+        res.send(vaca)
+    })
+
+
+
 
 
 
