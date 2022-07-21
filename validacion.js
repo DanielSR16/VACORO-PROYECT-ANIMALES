@@ -19,7 +19,6 @@ const verificacion = express.Router()
     }
     if(token){
         jwt.verify(token,"clavesecreta123",(error,decode)=>{
-console.log(error)
             if(error){
                 return res.json({
                     message: 'el token no es valido'
