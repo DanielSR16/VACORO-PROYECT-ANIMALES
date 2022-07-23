@@ -79,7 +79,7 @@ router.post('/new', verificacion,async (req,res)=>{
         const vaca = await vaca_DAO.controller.updateVaca(Vaca);
         res.send({status: 'ok'});
     })
-    router.post('/delete', async (req,res)=>{
+    router.post('/delete', verificacion,async (req,res)=>{
         id = req.body.id
 
         const Vaca = {
@@ -106,7 +106,7 @@ router.post('/new', verificacion,async (req,res)=>{
                 "nombre": "Sin madre",
                 "descripcion": "NULL",
                 "raza": "NULL",
-                "num_arete": "NULL",
+                "num_arete": "S/N",
                 "url_img": "https://image-vacoro.s3.amazonaws.com/d2b9e08f-322b-4d98-8322-2569665e523c.jpg",
                 "estado": -1,
                 "edad": -1,
