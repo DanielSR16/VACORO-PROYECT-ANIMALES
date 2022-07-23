@@ -89,6 +89,24 @@ async function getBecerrosbyIdUser(usuario){
     }
 }
 
+async function getBecerrosbyIdvaca(vaca){
+
+    try{
+        resultado = await becerro.findAll({
+            where: {
+                id_vaca : vaca.id_vaca,
+            },
+        })
+        if (resultado === null) {
+            return null
+        } else {
+            return resultado
+        }
+    }catch(err){
+        return err
+    }
+}
+
 controller = {}
 controller.allBecerros = allBecerros
 controller.newBecerro = newBecerro
@@ -96,4 +114,5 @@ controller.updateBecerro = updateBecerro
 controller.deleteBecerro = deleteBecerro
 controller.getBecerrobyId = getBecerrobyId
 controller.getBecerrosbyIdUser = getBecerrosbyIdUser
+controller.getBecerrosbyIdvaca = getBecerrosbyIdvaca
 module.exports = {controller}
