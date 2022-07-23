@@ -148,5 +148,15 @@ router.post('/getBecerrobyId',verificacion, async (req,res)=>{
     res.json(data);
 });
 
+router.post('/getBecerrosbyIdvaca',verificacion,async(req,res)=>{
+    id_vaca = req.body.id_vaca
+
+    const vacaid ={
+        id_vaca :id_vaca
+    }
+    const vaca =  await becerro_DAO.controller.getBecerrosbyIdvaca(vacaid)
+    res.send(vaca)
+})
+
 
 module.exports = router;
