@@ -2,7 +2,9 @@ const { Sequelize } = require('sequelize');
 const usuarioModel =  require("../model/usuario")
 const sequelize = new Sequelize(process.env.DATABASE, process.env.USERDB, process.env.PASSWORD_DB, {
     host: process.env.HOSTDB,
-    dialect: process.env.DIALECT 
+    dialect: process.env.DIALECT,
+    raw: true,
+    nest: true,
 });
 
  

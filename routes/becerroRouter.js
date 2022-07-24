@@ -37,8 +37,7 @@ router.get('/',(req,res)=>{
     res.send('Hola prueba becerro')
 });
 
-
-router.get('/all',verificacion,async(req,res)=>{
+router.get('/all',async(req,res)=>{
     console.log('aaaaaaaaaaaaaa')
     const becerro =  await becerro_DAO.controller.allBecerros()
     res.send(becerro)
