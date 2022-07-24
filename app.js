@@ -13,12 +13,15 @@ const vacaRouter = require('./routes/vacaRouter');
 const toroRouter = require('./routes/toroRouter');
 const becerroRouter = require('./routes/becerroRouter');
 const pdfRouter = require('./routes/pdfRouter');
+const vaca_DAO = require("./controller/vacaDAO");
 
 app.use('/vaca',vacaRouter);
 app.use('/toro',toroRouter);
 app.use('/becerro',becerroRouter);
 app.use('/pdf',pdfRouter);
-
+app.get('/', async (req,res)=>{
+    res.send('Back animales vacoro')
+});
 
 app.listen(3001,()=>{
     console.log('servidor corriendo en el puerto '+3001)
